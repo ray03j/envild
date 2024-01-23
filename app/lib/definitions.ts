@@ -1,4 +1,4 @@
-export type PostCard = {
+export type PostInfo = {
   title: string;
   envTag: string; // 1つの環境構築の対象
   tagsComponent: string[];
