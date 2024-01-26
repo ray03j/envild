@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { CreatePost } from '@/app/ui/posts/buttons';
 
 const Header = () => {
   return (
@@ -9,10 +10,7 @@ const Header = () => {
             <a className='hover:underline'>Home</a>  
         </li>
         <li>
-            <a className='hover:underline'>About</a>
-        </li>
-        <li>
-            <a className='hover:underline'>Contact</a>
+            <CreatePost />
         </li>
       </ul>
     </div>
