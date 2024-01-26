@@ -2,19 +2,19 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div className='flex'>
-        <div className='m-2 text-4xl'>Envild</div>
-        <ul className='flex'>
-          <li className='m-2'>
-              <a>Home</a>
-          </li>
-          <li className='m-2'>
-              <a>About</a>
-          </li>
-          <li className='m-2'>
-              <a>Contact</a>
-          </li>
-        </ul>
+    <div className='flex items-center justify-between p-4 bg-gray-800 text-white'>
+      <div className='text-4xl font-bold'>Envild</div>
+      <ul className='flex space-x-4'>
+        <li>
+            <a className='hover:underline'>Home</a>  
+        </li>
+        <li>
+            <a className='hover:underline'>About</a>
+        </li>
+        <li>
+            <a className='hover:underline'>Contact</a>
+        </li>
+      </ul>
     </div>
   );
 };
