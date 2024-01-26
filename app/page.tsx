@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Link from "next/link";
 import Header from "./ui/Header";
 import LineUpPostCard from "./ui/LineUpPostCard";
 
