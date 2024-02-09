@@ -1,9 +1,12 @@
 import { PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+}
 
 
-export function CreatePost() {
+export function CreatePost({children, className, ...rest}:ButtonProps) {
   return (
     <Link
       href="/create"

@@ -25,7 +25,7 @@ export type State = {
   message?: string | null;
 }
 
-export const createPost = async (prevState: State, formData: FormData) => {
+export async function createPost(prevState: State, formData: FormData) {
   const validatedFields = CreatePost.safeParse({
     title: formData.get('title'),
     envTag: formData.get('env_tag'),
@@ -41,7 +41,7 @@ export const createPost = async (prevState: State, formData: FormData) => {
   
   const {title, envTag, tagsComponent} = validatedFields.data;
   const tagsComponentString = `{${tagsComponent.join(',')}}`
-  const date = new Date().toLocaleString();
+  const date = new Date().toISOString().split('T')[0];
 
   try {
     await sql`
