@@ -6,7 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 
-export function CreatePost({children, className, ...rest}:ButtonProps) {
+export function CreatePost() {
   return (
     <Link
       href="/create"
