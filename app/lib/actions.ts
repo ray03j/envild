@@ -9,8 +9,8 @@ import { redirect } from 'next/navigation';
 // オブジェクト生成時のスキーマ
 const FormSchema = z.object({
   title: z.string(),
-  envTag: z.string(),
-  tagsComponent: z.array(z.string()),
+  mainTag: z.string(),
+  extraTag: z.array(z.string()),
   dateTime: z.date(),
 });
 
@@ -19,17 +19,20 @@ const CreatePost = FormSchema.omit({dateTime: true});
 export type State = {
   errors?: {
     title?: string[];
-    envTag?: string[];
-    tagsComponent?: string[];
+    mainTag?: string[];
+    extraTag?: string[];
   };
   message?: string | null;
 }
 
 export async function createPost(prevState: State, formData: FormData) {
+  const extraTagString = formData.get('extra_tag') as string;
+  const extraTagArray = extraTagString.split(',');
+  
   const validatedFields = CreatePost.safeParse({
     title: formData.get('title'),
     envTag: formData.get('env_tag'),
-    tagsComponent: formData.get('tags_component'),
+    tagsComponent: extraTagArray,
   });
 
   if(!validatedFields.success){ 
@@ -39,18 +42,18 @@ export async function createPost(prevState: State, formData: FormData) {
     }
   }
   
-  const {title, envTag, tagsComponent} = validatedFields.data;
-  const tagsComponentString = `{${tagsComponent.join(',')}}`
+  const {title, mainTag, extraTag} = validatedFields.data;
+
   const date = new Date().toISOString().split('T')[0];
 
   try {
     await sql`
     INSERT INTO posts (title, env_tag, tags_component, date)
-    VALUES(${title}, ${envTag}, ${tagsComponentString});
+    VALUES(${title}, ${mainTag}, ${extraTagString});
     `
   } catch (error) {
     return{
-      message:'データベースで登校の作成に失敗しました。',
+      message:'データベースで投稿の作成に失敗しました。',
     };
   }
 

@@ -1,10 +1,11 @@
-export type PostInfo = {
+export type PostPreview = {
   id: string;
-  userid: string;
   title: string;
-  envTag: string; // 1つの環境構築の対象
-  tagsComponent: string[];
+  mainTag: string; // 1つの環境構築の対象
+  extraTag: string[];
+  content: string;
   dateTime: Date; // メソッドでそれぞれ取得可能
 }
+//   userid: string;
 
 export type PostContent = {}

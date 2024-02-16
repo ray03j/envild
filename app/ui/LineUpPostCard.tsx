@@ -1,29 +1,29 @@
-import { PostInfo } from "@/app/lib/definitions";
+import { PostPreview } from "@/app/lib/definitions";
 import PostCard from "./PostCard";
 
-const postsInfo: PostInfo[] = [
+const postsInfo: PostPreview[] = [
 {
   id: "1",
-  userid: "01",
   title: "title1",
-  envTag: "Ubuntu",
-  tagsComponent:["tag1", "tag2"],
+  mainTag: "Ubuntu",
+  extraTag:["tag1", "tag2"],
+  content: "hoge",
   dateTime: new Date(),
 },
 {
   id: "2",
-  userid: "01",
   title: "title2",
-  envTag: "C",
-  tagsComponent:["tag3", "tag4"],
+  mainTag: "C",
+  extraTag:["tag3", "tag4"],
+  content: "hoge",
   dateTime: new Date(),
 },
 {
   id: "3",
-  userid: "02",
   title: "title3",
-  envTag: "Go",
-  tagsComponent:["tag5", "tag6"],
+  mainTag: "Go",
+  extraTag:["tag5", "tag6"],
+  content: "hoge",
   dateTime: new Date(),
 },
 ]
