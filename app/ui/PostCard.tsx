@@ -1,12 +1,21 @@
-const PostCard = () => {
+import { PostPreview } from "@/app/lib/definitions";
+
+const PostCard = (postInfo: PostPreview) => {
   return (
-    <div className="m-2 w-64 h-32 rounded bg-gray-300 text-black">
+    <div className="m-2 w-64 h-42 rounded bg-gray-300 text-black p-4">
       <div>
-        <div className="text-3xl">title</div>
-        <div className="text-2xl">env tag</div>
+        <div className="text-2xl font-bold mb-2">{postInfo.title}</div>
+        <div className="text-xl">{postInfo.mainTag}</div>
       </div>
-        {/* <div>tags component</div>
-        <div>date time</div> */}
+      <div className="flex mt-2">
+        {postInfo.extraTag && 
+          postInfo.extraTag.map((tag, i) => (
+            <div key={i} className="mr-2 bg-gray-200 p-1 rounded">{tag}</div>
+          ))}
+      </div>
+      <div className="mt-2 text-gray-600">
+        {postInfo.dateTime ? postInfo.dateTime.toLocaleString() : ""}
+      </div>
     </div>
   );
 };
