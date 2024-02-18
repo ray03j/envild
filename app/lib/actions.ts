@@ -11,30 +11,32 @@ const FormSchema = z.object({
   title: z.string(),
   mainTag: z.string(),
   extraTag: z.array(z.string()),
+  content: z.string(),
   dateTime: z.date(),
 });
 
-const CreatePost = FormSchema.omit({dateTime: true});
+const CreatePost = FormSchema.omit({content: true ,dateTime: true});
 
 export type State = {
   errors?: {
     title?: string[];
     mainTag?: string[];
     extraTag?: string[];
+    content?: string;
   };
   message?: string | null;
 }
 
 export async function createPost(prevState: State, formData: FormData) {
-  const extraTagString = formData.get('extra_tag') as string;
-  const extraTagArray = extraTagString.split(',');
+  const extraTagArray = (formData.get('extra_tag') as string).split(',');
+  
   
   const validatedFields = CreatePost.safeParse({
     title: formData.get('title'),
-    envTag: formData.get('env_tag'),
-    tagsComponent: extraTagArray,
+    mainTag: formData.get('main_tag'),
+    extraTag: extraTagArray,
   });
-
+  
   if(!validatedFields.success){ 
     return {
       errors: validatedFields.error.flatten().fieldErrors,
@@ -43,15 +45,20 @@ export async function createPost(prevState: State, formData: FormData) {
   }
   
   const {title, mainTag, extraTag} = validatedFields.data;
-
-  const date = new Date().toISOString().split('T')[0];
+  
+  const dateTime = new Date().toISOString().split('T')[0];
+  const extraTagString = `{${extraTag.join(',')}}`;
+  const content = ''
+  
+  console.error(extraTagString)
 
   try {
     await sql`
-    INSERT INTO posts (title, env_tag, tags_component, date)
-    VALUES(${title}, ${mainTag}, ${extraTagString});
+    INSERT INTO posts (title, main_tag, extra_tag, content,  date_time)
+    VALUES(${title}, ${mainTag}, ${extraTagString}, ${content}, ${dateTime});
     `
   } catch (error) {
+    // console.error('データベースで投稿の作成に失敗しました。エラー詳細:', error);
     return{
       message:'データベースで投稿の作成に失敗しました。',
     };

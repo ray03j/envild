@@ -1,6 +1,6 @@
 const dotenv = require('dotenv/config')
 const { db } = require('@vercel/postgres');
-const {post} = require('../app/lib/placeholder-data.js')
+const {posts} = require('../app/lib/placeholder-data.js')
 const bcrypt = require('bcrypt')
 
 
@@ -14,8 +14,7 @@ async function seedPosts(client) {
       main_tag VARCHAR(255) NOT NULL,
       extra_tag VARCHAR(255)[],
       content TEXT,
-      date_time TIMESTAMP NOT NULL,
-      ON CONFLICT (id) DO NOTHING
+      date_time TIMESTAMP NOT NULL
     );
     `; 
     // FOREIGN KEY(user_id) REFERENCES users(id)
@@ -27,11 +26,12 @@ async function seedPosts(client) {
     const insertedPosts = await Promise.all(
       posts.map( async (post) => {
         const extraTagString = `{${post.extraTag.join(',')}}`;
-        const query = await client.sql`
+
+        return client.sql`
         INSERT INTO posts (id, title, main_tag, extra_tag, content, date_time)
-        VALUES (${post.id}, ${post.title}, ${post.mainTag}, ${extraTagString}, ${post.content}, ${post.dateTime})
-        ON CONFLICT (id) DO NOTHING;`
-        return query
+        VALUES ( uuid_generate_v4(), ${post.title}, ${post.mainTag}, ${extraTagString}, ${post.content}, ${post.dateTime})
+        ON CONFLICT (id) DO NOTHING;
+        `;
     }),
     );
 
@@ -57,3 +57,10 @@ async function main(){
 
   await client.end();
 }
+
+main().catch((err) => {
+  console.error(
+    'An error occurred while attempting to seed the database:',
+    err,
+  );
+});
