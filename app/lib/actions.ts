@@ -22,7 +22,7 @@ export type State = {
     title?: string[];
     mainTag?: string[];
     extraTag?: string[];
-    content?: string;
+    content?: string[];
   };
   message?: string | null;
 }
@@ -53,17 +53,23 @@ export async function createPost(prevState: State, formData: FormData) {
   console.error(extraTagString)
 
   try {
-    await sql`
+    const result = await sql`
     INSERT INTO posts (title, main_tag, extra_tag, content,  date_time)
-    VALUES(${title}, ${mainTag}, ${extraTagString}, ${content}, ${dateTime});
+    VALUES(${title}, ${mainTag}, ${extraTagString}, ${content}, ${dateTime})
+    RETURNING id;
     `
+
+    const {id} = result.rows[0].id;
+    
+    revalidatePath('/')
+    revalidatePath(`/posts/[${id}]/edit/page.tsx`)
+    revalidatePath(`/posts/[${id}]/page.tsx`)
+  
+    redirect(`/posts/[${id}]/edit/page.tsx`)
   } catch (error) {
-    // console.error('データベースで投稿の作成に失敗しました。エラー詳細:', error);
     return{
       message:'データベースで投稿の作成に失敗しました。',
     };
   }
-
-  revalidatePath('/')
-  redirect('/')
+  
 }
