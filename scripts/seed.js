@@ -13,10 +13,13 @@ async function seedPosts(client) {
       title VARCHAR(255) NOT NULL,
       main_tag VARCHAR(255) NOT NULL,
       extra_tag VARCHAR(255)[],
-      content TEXT,
+      content TEXT NOT NULL,
       date_time TIMESTAMP NOT NULL
     );
-    `; 
+    `;
+    // created_at TIMESTAMP NOT NULL
+    // updated_at TIMESTAMP 
+    
     // FOREIGN KEY(user_id) REFERENCES users(id)
     
     
