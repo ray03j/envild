@@ -8,4 +8,41 @@ export type PostPreview = {
 }
 //   userid: string;
 
-export type PostContent = {}
+export type PostContentForm = {
+  title: string;
+  mainTag: string;
+  extraTag: string[];
+  content: string;
+}
+
+/*
+export type PostPreviewForm = {
+  title: string;
+  mainTag: string;
+  extraTag: string[];
+}
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+
+export type PostsTableType = {
+  id: string;
+  title: string;
+  mainTag: string; // 1つの環境構築の対象
+  extraTag: string[];
+  content: string;
+  dateTime: Date;
+}
+
+export type TagsTableType = {
+  id: string;
+  name: string;
+  type: 'main' | 'extra';
+}
+
+*/

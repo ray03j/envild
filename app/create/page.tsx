@@ -9,7 +9,7 @@ import { CreatePost } from "@/app/ui/posts/buttons";
 type Optional = "id" | "userid" | "dateTime";
 type PostForm = Omit<PostPreview, Optional>;
 
-export default function Form() {
+export default function PostForm() {
   const initialState = {message: null, errors: {}};
   const [state, dispatch] = useFormState<State, FormData>(createPost, initialState);
 
