@@ -4,8 +4,6 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { error } from 'console';
-import { PostContentForm } from './definitions';
 
 
 // オブジェクト生成時のスキーマ
@@ -43,6 +41,8 @@ export type State = {
 }
 
 export async function createPost(prevState: State, formData: FormData) {
+  let id: string;
+
   const extraTagArray = (formData.get('extra_tag') as string).split(',');
   
   
@@ -72,18 +72,19 @@ export async function createPost(prevState: State, formData: FormData) {
     RETURNING id;
     `
 
-    const {id} = result.rows[0].id;
+    id = result.rows[0].id;
     
-    revalidatePath('/')
-    revalidatePath(`/posts/[${id}]/edit/page.tsx`)
-    revalidatePath(`/posts/[${id}]/page.tsx`)
-  
-    redirect(`/posts/[${id}]/edit/page.tsx`)
   } catch (error) {
+    console.error(error)
     return{
       message:'データベースで投稿の作成に失敗しました。',
     };
   }
+  revalidatePath('/')
+  revalidatePath(`/posts/${id}/edit`)
+  revalidatePath(`/posts/${id}`)
+
+  redirect(`/posts/${id}/edit`)
   
 }
 
