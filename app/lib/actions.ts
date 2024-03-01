@@ -41,6 +41,7 @@ export type State = {
 }
 
 export async function createPost(prevState: State, formData: FormData) {
+ 
   let id: string;
 
   const extraTagArray = (formData.get('extra_tag') as string).split(',');
