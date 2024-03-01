@@ -1,18 +1,25 @@
 export type PostPreview = {
   id: string;
+  userid: string;
   title: string;
   mainTag: string; // 1つの環境構築の対象
   extraTag: string[];
   content: string;
   dateTime: Date; // メソッドでそれぞれ取得可能
 }
-//   userid: string;
 
 export type PostContentForm = {
   title: string;
   mainTag: string;
   extraTag: string[];
   content: string;
+}
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 /*
@@ -22,12 +29,6 @@ export type PostPreviewForm = {
   extraTag: string[];
 }
 
-export type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-}
 
 
 export type PostsTableType = {
