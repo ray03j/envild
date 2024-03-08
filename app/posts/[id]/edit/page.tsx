@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEventHandler, FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SimpleMde from 'react-simplemde-editor';
 import "easymde/dist/easymde.min.css";
 import { useFormState } from 'react-dom';
@@ -23,7 +23,6 @@ export default function EditPostForm() {
   // 動的ルーティングのパラメータを取得
   const params = useParams();
   const id = params.id as string;
-  
   
   useEffect(() => {
     const getPostPreview = async () => {

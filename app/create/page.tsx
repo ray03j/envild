@@ -1,9 +1,9 @@
 'use client'
 
 import { useFormState } from "react-dom";
-import { State, createPost } from "@/app/lib/actions";
+import { createPost } from "@/app/lib/actions";
 import Link from "next/link";
-import { PostPreview } from "@/app/lib/definitions";
+import { PostPreview, State } from "@/app/lib/definitions";
 import { CreatePost } from "@/app/ui/posts/buttons";
 
 type Optional = "id" | "userid" | "dateTime";
@@ -44,8 +44,8 @@ export default function PostForm() {
         className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500 text-black"
       />
       <div  aria-live="polite" aria-atomic="true">
-        {state.errors?.mainTag &&
-          state.errors.mainTag.map((error: string) => (
+        {state.errors?.main_tag &&
+          state.errors.main_tag.map((error: string) => (
             <p className="mt-2 text-sm text-red-500" key={error}>
               {error}
             </p>
@@ -62,8 +62,8 @@ export default function PostForm() {
         className="text-black w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500"
       />
       <div  aria-live="polite" aria-atomic="true">
-        {state.errors?.extraTag &&
-          state.errors.extraTag.map((error: string) => (
+        {state.errors?.extra_tag &&
+          state.errors.extra_tag.map((error: string) => (
             <p className="mt-2 text-sm text-red-500" key={error}>
               {error}
             </p>
