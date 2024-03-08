@@ -24,8 +24,8 @@ export type State = {
   errors?: {
     id?: string[];
     title?: string[];
-    mainTag?: string[];
-    extraTag?: string[];
+    main_tag?: string[];
+    extra_tag?: string[];
     content?: string[];
     dateTime?: string[];
   };

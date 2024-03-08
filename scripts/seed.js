@@ -1,7 +1,7 @@
-const dotenv = require('dotenv/config')
-const { db } = require('@vercel/postgres');
-const {posts} = require('../app/lib/placeholder-data.js')
-const bcrypt = require('bcrypt')
+import dotenv from 'dotenv/config';
+import { db } from '@vercel/postgres';
+import { posts } from '../app/lib/placeholder-data.js';
+import bcrypt from 'bcrypt';
 
 
 // seedUsers
@@ -12,8 +12,8 @@ async function seedPosts(client) {
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
       title VARCHAR(255) NOT NULL,
       main_tag VARCHAR(255) NOT NULL,
-      extra_tag VARCHAR(255)[],
-      content TEXT NOT NULL,
+      extra_tag VARCHAR(255)[] NOT NULL,
+      content TEXT NOT NULL NOT NULL,
       date_time TIMESTAMP NOT NULL
     );
     `;

@@ -13,6 +13,7 @@ export type PostContentForm = {
   mainTag: string;
   extraTag: string[];
   content: string;
+  dateTime: Date;
 }
 
 /*
