@@ -1,4 +1,7 @@
-import { sql } from '@vercel/postgres';
+
+'use server';
+
+import { Pool, sql } from '@vercel/postgres';
 import { PostContentForm, PostPreview } from './definitions';
 
 export async function fetchAllPosts() {
@@ -40,27 +43,19 @@ export async function fetchLatestPosts() {
 // 編集時に前回の入力を取り出す
 export async function fetchPreviewOfPost(id: string) {
   try {
-    console.log("hoge")
-    
-    // +{
-    //     POSTGRES_URL: process.env.POSTGRES_URL,
-    //     POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING
-    // });
-
-    const data = await sql<PostContentForm>`
-    SELECT posts.title, posts.main_tag, posts.extra_tag, posts.date_time
+    const v = await sql<PostContentForm>`
+    SELECT posts.title, posts.main_tag, posts.extra_tag, posts.content, posts.date_time
     FROM posts
-    WHERE posts.id = ${id}`;
-
-    if (data.rows.length === 0) {
+    WHERE posts.id=${id};`;
+undefined
+    if (v.rows.length === 0) {
       throw new Error('Post not found');
     }
 
-
-    return data.rows[0];
+    return v.rows[0];
 
   } catch (error) {
-    console.error('Database Error hoge: ', error);
+    console.error('Database Error 3:',error);
     throw new Error('Failed to fetch the preview of the post.');
   }
 }
