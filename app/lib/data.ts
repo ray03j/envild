@@ -3,7 +3,6 @@
 
 import { Pool, sql } from '@vercel/postgres';
 import { PostContentForm, PostPreview } from './definitions';
-import { State } from './actions';
 
 export async function fetchAllPosts() {
   // Add noStore() here prevent the response from being cached.

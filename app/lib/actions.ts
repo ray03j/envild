@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { State } from './definitions';
 
 
 // オブジェクト生成時のスキーマ
@@ -20,25 +21,6 @@ const CreatePost = FormSchema.omit({id: true, content: true ,dateTime: true});
 const UpdatePost = FormSchema.omit({dateTime: true});
 
 
-export type State = {
-  errors?: {
-    id?: string[];
-    title?: string[];
-    main_tag?: string[];
-    extra_tag?: string[];
-    content?: string[];
-    dateTime?: string[];
-  };
-  values?: {
-    id?: string;
-    title?: string;
-    mainTag?: string;
-    extraTag?: string[];
-    content?: string;
-    dateTime?: Date;
-  }
-  message?: string | null;
-}
 
 export async function createPost(prevState: State, formData: FormData) {
  
@@ -134,7 +116,7 @@ export async function updatePost(prevState: State, formData: FormData) {
       redirect(`/`)
       return {
         message: '投稿が更新されました。',
-        errors: {} // エラーがないことを示すために空のエラーオブジェクトを設定する
+        errors: {} 
       };
 }
 

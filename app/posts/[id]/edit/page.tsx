@@ -4,9 +4,10 @@ import { ChangeEventHandler, FormEvent, useEffect, useState } from 'react';
 import SimpleMde from 'react-simplemde-editor';
 import "easymde/dist/easymde.min.css";
 import { useFormState } from 'react-dom';
-import { State, updatePost } from '@/app/lib/actions';
+import { updatePost } from '@/app/lib/actions';
 import { useParams, usePathname } from 'next/navigation';
 import { fetchPreviewOfPost } from '@/app/lib/data';
+import { State } from '@/app/lib/definitions';
 
 
 
