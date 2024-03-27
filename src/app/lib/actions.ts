@@ -34,6 +34,7 @@ export async function createPost(prevState: State, formData: FormData) {
     mainTag: formData.get('main_tag'),
     extraTag: extraTagArray,
   });
+
   
   if(!validatedFields.success){ 
     return {
@@ -43,6 +44,17 @@ export async function createPost(prevState: State, formData: FormData) {
   }
   
   const {title, mainTag, extraTag} = validatedFields.data;
+  
+  if (!title || !mainTag || extraTag.length === 0) {
+    return {
+      errors: {
+        title: !title ? ['タイトルを入力してください。'] : [],
+        mainTag: !mainTag ? ['メインタグを入力してください。'] : [],
+        extraTag: extraTag.length === 0 ? ['少なくとも1つの追加タグを入力してください。'] : []
+      },
+      message: '投稿に失敗しました。'
+    }
+  }
   
   const dateTime = new Date().toISOString().split('T')[0];
   const extraTagString = `{${extraTag.join(',')}}`;
@@ -64,10 +76,10 @@ export async function createPost(prevState: State, formData: FormData) {
     };
   }
   revalidatePath('/')
-  revalidatePath(`/posts/${id}/edit`)
-  revalidatePath(`/posts/${id}`)
+  revalidatePath(`/posts/edit`)
+  revalidatePath(`/posts/edit/${id}`)
 
-  redirect(`/posts/${id}/edit`)
+  redirect(`/posts/edit/${id}`)
   
 }
 
@@ -93,8 +105,6 @@ export async function updatePost(prevState: State, formData: FormData) {
   const { id, title, mainTag, extraTag, content} = validatedFields.data;
 
   const extraTagString = `{${extraTag.join(',')}}`;
-
-
 
   try {
     const result = await sql`

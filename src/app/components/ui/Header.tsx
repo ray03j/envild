@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CreatePost } from '@/app/ui/posts/buttons';
+import { CreatePost } from '@/app/components/ui/posts/buttons';
 
 const Header = () => {
   return (
@@ -7,10 +7,10 @@ const Header = () => {
       <div className='text-4xl font-bold'>Envild</div>
       <ul className='flex space-x-4'>
         <li>
-            <a className='hover:underline'>Home</a>  
+          <CreatePost />
         </li>
         <li>
-            <CreatePost />
+          <a className='hover:underline'>ユーザ</a>
         </li>
       </ul>
     </div>
