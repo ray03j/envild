@@ -5,6 +5,7 @@ import { createPost } from "@/app/lib/actions";
 import Link from "next/link";
 import { PostPreview, State } from "@/app/lib/definitions";
 import { CreatePost } from "@/app/ui/posts/buttons";
+import { HomeButton } from "@/app/ui/posts/buttons";
 
 type Optional = "id" | "userid" | "dateTime";
 type PostForm = Omit<PostPreview, Optional>;
@@ -73,7 +74,7 @@ export default function PostForm() {
     
 
     <div className="mb-4">
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Create Post</button>
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">投稿</button>
       {state.message && (
         // aria-live="polite" は、動的に変化する要素をスクリーンリーダーに読み上げさせるための属性
         // これにより、エラーメッセージが表示されたときにスクリーンリーダーが読み上げる
@@ -83,11 +84,7 @@ export default function PostForm() {
       )}        
     </div>
 
-    <div>
-      <Link href="/" className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200">
-        Cancel
-      </Link>
-    </div>
+    <HomeButton>キャンセル</HomeButton>
   </form>
   );
 }
