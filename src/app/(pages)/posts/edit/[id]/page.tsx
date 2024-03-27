@@ -29,16 +29,6 @@ export default function EditPostForm() {
       try {
         const data = await fetchPreviewOfPost(id);
         console.log("data:",data)
-        
-        // const newState: Awaited<State> = {
-        //   ...prevState,
-        //   values: {
-        //     title: data.title,
-        //     mainTag: data.mainTag,
-        //     extraTag: data.extraTag,
-        //     content: data.content
-        //   }
-        // }
 
         const newState: Awaited<State> = {
           ...prevState,
@@ -73,7 +63,7 @@ export default function EditPostForm() {
     <form action={dispatch} className="max-w-screen-md mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-md p-6">
         <h1 className="text-3xl font-bold mb-4 text-gray-800">Create Post</h1>
-{JSON.stringify(prevState)}
+{/* {JSON.stringify(prevState)} */}
     <div className="mb-4">
       <label htmlFor="title" className="block text-sm font-semibold mb-1 text-black">Title</label>
       <input

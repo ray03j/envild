@@ -76,10 +76,10 @@ export async function createPost(prevState: State, formData: FormData) {
     };
   }
   revalidatePath('/')
-  revalidatePath(`/posts/${id}/edit`)
-  revalidatePath(`/posts/${id}`)
+  revalidatePath(`/posts/edit`)
+  revalidatePath(`/posts/edit/${id}`)
 
-  redirect(`/posts/${id}/edit`)
+  redirect(`/posts/edit/${id}`)
   
 }
 
@@ -105,8 +105,6 @@ export async function updatePost(prevState: State, formData: FormData) {
   const { id, title, mainTag, extraTag, content} = validatedFields.data;
 
   const extraTagString = `{${extraTag.join(',')}}`;
-
-
 
   try {
     const result = await sql`

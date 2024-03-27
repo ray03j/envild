@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CreatePost } from '@/app/ui/posts/buttons';
+import { CreatePost } from '@/app/components/ui/posts/buttons';
 
 const Header = () => {
   return (

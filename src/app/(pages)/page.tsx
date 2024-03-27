@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Header from "./ui/Header";
-import LineUpPostCard from "./ui/LineUpPostCard";
+import Header from "../components/ui/Header";
+import LineUpPostCard from "../components/ui/LineUpPostCard";
 
 export default function Home() {
   return (
